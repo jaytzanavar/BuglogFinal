@@ -1,0 +1,171 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-dark mt-4 mb-4">ADMIN DASHBOARD</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card rounded alert-success bd-callout bd-callout-success">
+                <div class="card-body p-3">
+                    <div class="row p-2">
+                        <div class="col-md-8 text-left">
+                            <h5 class="text-secondary">Applications: {{ timelineData.appsCount }}</h5>
+                        </div>
+                        <div class="col-md-4 text-right">
+                            <h1 class="text-secondary"><i class="fa fa-puzzle-piece mr-2"></i></h1>
+                        </div>
+                    </div>
+                    <div class="row p-2 mt-2 text-center">
+                        <div class="col-md-12">
+                            <a href="" class="text-success">SHOW APPLICATIONS</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card rounded alert-info bd-callout bd-callout-info">
+                <div class="card-body p-3">
+                    <div class="row p-2">
+                        <div class="col-md-8 text-left">
+                            <h5 class="text-secondary">Total reports: {{ timelineData.reportsCount }}</h5>
+                            <h6 class="text-muted">Solved reports: {{ timelineData.solvedReportsCount }}</h6>
+                        </div>
+                        <div class="col-md-4 text-right">
+                            <h1 class="text-secondary"><i class="fa fa-graduation-cap mr-2"></i></h1>
+                        </div>
+                    </div>
+                    <div class="row p-2 mt-2 text-center">
+                        <div class="col-md-12">
+                            <a href="" class="text-info">SHOW REPORTS</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card rounded alert-primary bd-callout bd-callout-primary">
+                <div class="card-body p-3">
+                    <div class="row p-2">
+                        <div class="col-md-8 text-left">
+                            <h5 class="text-secondary">Total users: {{ timelineData.usersCount }}</h5>
+                            <h6 class="text-muted">Active users: {{ timelineData.activeUsersCount }}</h6>
+                        </div>
+                        <div class="col-md-4 text-right">
+                            <h1 class="text-secondary"><i class="fa fa-users mr-2"></i></h1>
+                        </div>
+                    </div>
+                    <div class="row p-2 mt-2 text-center">
+                        <div class="col-md-12">
+                            <a href="" class="text-primary">SHOW USERS</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="card border bg-light">
+                <div class="card-body p-3 border-bottom">
+                    <h5 class="m-0 text-muted">ACTIVITY</h5>
+                </div>
+                <div class="card-body p-3">
+                    <div class="ct-chart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <div class="card border bg-light">
+                <div class="card-body p-3 border-bottom">
+                    <h5 class="m-0 text-muted">
+                        <i _ngcontent-c3="" class="fa fa-cog mr-2"></i>SYSTEM SETTINGS
+                    </h5>
+                </div>
+                <div class="card-body p-3">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card border bg-light">
+                <div class="card-body p-3 border-bottom">
+                    <h5 class="m-0 text-muted">
+                        <i _ngcontent-c3="" class="fa fa-puzzle-piece mr-2"></i>APPLICATION SETTINGS
+                    </h5>
+                </div>
+                <div class="card-body p-3">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5 mb-5">
+        <div class="col-md-6">
+            <div class="card border bg-light">
+                <div class="card-body p-3 border-bottom">
+                    <h5 class="m-0 text-muted">
+                        <i class="fa fa-user-circle mr-2" aria-hidden="true"></i>USER SETTINGS
+                    </h5>
+                </div>
+                <div class="card-body p-3">
+                    <form class="mt-2">
+                        <div class="form-group pb-4 border-bottom">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <label class="form-check-label" for="exampleCheck1">Allow new users</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-sm btn-secondary btn-toggle ml-1"
+                                            data-toggle="button" aria-pressed="true" autocomplete="off"
+                                            (click)="registerUsersStatusEvent()" [ngClass]="registerUsersStatus ? 'active' : ''">
+                                        <div class="handle"></div>
+                                    </button>
+                                </div>
+                            </div>
+                            <small id="emailHelp" class="form-text text-muted">Turn on/off account registrations</small>
+                        </div>
+                        <div class="form-group pb-4 border-bottom">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label for="registerSlogan">Token expiration</label>
+                                </div>
+                                <div class="col-md-4 input-group">
+                                    <input class="form-control" type="number" value="1" />
+                                    <div class="input-group-append" aria-describedby="hourse-addon">
+                                        <span class="input-group-text" id="hourse-addon">Hours</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <small id="emailHelp" class="form-text text-muted">Max time to keep user logged in in Hours</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerSlogan">Register slogan</label>
+                            <textarea class="form-control" id="registerSlogan" rows="3"
+                                      placeholder="Πλατφόρμα Αναφοράς και Αποσφαλμάτωσης Πληροφοριακού Υλικού ΓΕΑ/ΚΜΗ"></textarea>
+                        </div>
+                        <div class="form-group text-right">
+                            <button type="submit" class="btn btn-primary disabled">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card border bg-light">
+                <div class="card-body p-3 border-bottom">
+                    <h5 class="m-0 text-muted">
+                        <i _ngcontent-c3="" class="fa fa-graduation-cap mr-2"></i>REPORT SETTINGS
+                    </h5>
+                </div>
+                <div class="card-body p-3">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

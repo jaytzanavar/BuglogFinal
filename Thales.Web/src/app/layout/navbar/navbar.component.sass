@@ -1,0 +1,60 @@
+a
+    cursor: pointer!important
+
+@mixin keyframes($animationName) 
+  @keyframes #{$animationName}
+    @content
+
+@mixin animate($name, $duration, $iteration, $direction) 
+          animation-duration: $duration
+          animation-iteration-count: $iteration
+          animation-name: $name
+          animation-direction: $direction
+
+@include keyframes(nudge)
+  0% 
+    transform: rotate(-7deg)
+   
+  33% 
+    transform: rotate(7deg)
+    
+  66% 
+    transform: rotate(-7deg)
+    
+@mixin nudge
+  @include animate(nudge, 0.7s, infinite, normal)
+
+@include keyframes(crawl)
+    0%
+        bottom: 0px
+       
+    33%
+        bottom: 50px
+        
+    66%
+        bottom: 0px
+        
+
+@mixin crawl
+    @include animate(crawl, 5s, infinite, normal)
+
+.bugnudge
+    @include nudge
+    
+.bugmove
+    @include crawl
+    position: relative
+    transition: all .5s ease-in-out
+    
+
+.height
+    height: 56px
+
+.bl-menu a.dropdown-item:hover
+    background-color: rgba( 200, 200, 200, .15 )
+
+nav.navbar
+    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, .0)
+    transition: box-shadow .2s ease-in-out
+    &.scro
+        box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, .50)

@@ -1,0 +1,44 @@
+<nav class="navbar nav_style navbar-expand-lg navbar-dark bg-dark fixed-top ">
+  <h3 class='mb-0 mr-2 bugnudge '><i class="fa fa-bug text-light bugmove"></i></h3>
+  <a class="navbar-brand text-center" [routerLink]="['/home']">BugLog</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown" *ngIf="loggedIn">
+        <a class="nav-link dropdown-toggle" (click)="openMenu =!openMenu" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Μενού
+        </a>
+        <div class="bl-menu dropdown-menu dropdown-menu-right bg-dark pt-2 pb-2" [ngClass]="{'show': openMenu}" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item text-light p-2 pl-3 pr-3" (click)="openMenu =!openMenu" [routerLink]="['/users']">
+            <i class="fa fa-address-book pr-3"></i>Χρήστες
+          </a>
+          <a class="dropdown-item text-light p-2 pl-3 pr-3" (click)="openMenu =!openMenu" [routerLink]="['/reports']">
+            <i class="fa fa-bug pr-3"></i>Αναφορές
+          </a>
+          <a class="dropdown-item text-light p-2 pl-3 pr-3" (click)="openMenu =!openMenu" [routerLink]="['/application']">
+            <i class="fa fa-folder pr-3"></i>Εφαρμογές
+          </a>
+          <a class="dropdown-item text-light p-2 pl-3 pr-3" (click)="openMenu =!openMenu" [routerLink]="['/user/profile']">
+            <i class="fa fa-user pr-3"></i>Το προφίλ μου
+          </a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="!loggedIn" routerLink="/login">Σύνδεση</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="loggedIn" (click)="logout()">Αποσύνδεση</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="!loggedIn" routerLink="/register">Εγγραφή</a>
+      </li>
+    </ul>
+
+  </div>
+</nav>
+<div *ngIf="loggedIn" class="height"></div>

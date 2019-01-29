@@ -1,0 +1,11 @@
+<div *ngIf="userRole == 'admin'">
+    <app-home-admin></app-home-admin>
+</div>
+
+<div *ngIf="userRole == 'manager'">
+    <app-home-user></app-home-user>
+</div>
+
+<div *ngIf="userRole == 'user'">
+    <app-home-user></app-home-user>
+</div>

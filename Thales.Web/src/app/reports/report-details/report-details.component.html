@@ -1,0 +1,146 @@
+<div class="container" >
+    <div class="row">
+      <div id='heading1' class="col-sm-12 mt-3">
+        <p class="h3 text-dark">{{report.id ? 'Επεξεργασία αιτήματος ': 'Νέο αίτημα '}}
+          <i class="text-monospaced text-secondary">{{getApplicationName()}}</i> :
+          <span [ngSwitch]="report.reportType">
+            <span class='badge badge-danger' *ngSwitchCase="0">
+              Σφαλμα
+            </span>
+            <span class="badge badge-success" *ngSwitchCase="1">
+              Παραδοχή
+            </span>
+            <span class='badge badge-pill badge-warning' *ngSwitchCase="2">
+              Βελτίωση
+            </span>
+            <span class='badge badge-pill badge-info' *n gSwitchCase="3">
+              Yποστήριξη
+            </span>
+            <span *ngSwitchDefault>
+            </span>
+          </span>
+        </p>
+        <p class="h6 text-secondary pt-2 pb-2">Συμπλήρωστε την παρακάτω φόρμα και πατήστε υποβολή για ολοκλήρωση</p>
+        <hr>
+      </div>
+      <div [formGroup]='reportForm' class="col" >
+        <div class="form-group row"  id='heading2'>
+          <label class="w-10 col-form-label">Εφαμογή</label>
+          <div  class="col">
+            <select class="form-control" formControlName='applicationId'>
+              <option *ngFor="let app of applications" value="{{app.id}}">{{app.name}}</option>
+            </select>
+  
+          </div>
+        </div>
+        <div class="form-group row" id='heading3'>
+          <label class="w-10 col-form-label">Τίτλος</label>
+          <div  class="col">
+            <input [ngClass]="formErrors.title? 'is-invalid':''"  type="text" class="form-control" formControlName='title'
+              id="title" placeholder="Σφάλμα εφαργμογής">
+            <!--  -->
+            <div *ngIf="formErrors.title" class="invalid-feedback-cust">
+              {{formErrors.title}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group row" id='heading4'>
+          <label class="w-10 col-form-label">Περίληψη</label>
+          <div  class="col">
+            <textarea [ngClass]="formErrors.summary? 'is-invalid':''" class="form-control" rows="4" aria-label="Summary"
+              formControlName='summary' id='summary'></textarea>
+            <div *ngIf="formErrors.summary" class="invalid-feedback-cust">
+              {{formErrors.summary}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group row" id='heading5'>
+          <label class="w-10 col-form-label">Σημειώσεις</label>
+          <div class="col">
+            <textarea class="form-control" rows="3" aria-label="notes" formControlName='notes' id='notes'></textarea>
+          </div>
+        </div>
+  
+        <div class="row justify-content-between mb-3">
+          <div class="col">
+            <div class="form-group row">
+              <label class="w-10 col-form-label">Είδος</label>
+              <div class="col">
+                <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" formControlName='reportType'>
+                  <label ngbButtonLabel class="btn-outline-danger">
+                    <input (click)='report.reportType = 0' ngbButton type="radio" [value]="0">
+                    <i class="fa fa-bug"></i> Σφάλμα
+                  </label>
+                  <label ngbButtonLabel class="btn-outline-success">
+                    <input (click)='report.reportType = 1' ngbButton type="radio" [value]="1">
+                    <i class="fa fa-plus-square"></i> Παραδοχή
+                  </label>
+                  <label ngbButtonLabel class="btn-outline-warning">
+                    <input (click)='report.reportType = 2' ngbButton type="radio" [value]="2">
+                    <i class="fa fa-wrench"></i> Βελτίωση
+                  </label>
+                  <label ngbButtonLabel class="btn-outline-info">
+                    <input (click)='report.reportType = 3' ngbButton type="radio" [value]="3">
+                    <i class="fa fa-user-circle-o"></i> Yποστήριξη
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row" id='heading6'>
+              <label  class="w-10 col-form-label">Προτεραιόητα</label>
+              <div class="col">
+                <select class="form-control  " formControlName='priority'>
+                  <option [value]="0">Χαμηλό</option>
+                  <option [value]="1">Μεσαίο</option>
+                  <option [value]="2"> Υψηλό</option>
+                  <option [value]="3">Επείγον</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row" id='heading7'>
+              <label class="w-10 col-form-label">Url Αναφοράς</label>
+              <div  class="col">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3">
+                      <i class="fa fa-globe"></i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" id="basic-url" formControlName='url' aria-describedby="basic-addon3">
+                </div>
+              </div>
+            </div>
+            <div class="form-group row" id='heading8'>
+              <label class="w-10 col-form-label">ScreenShot</label>
+              <div  class="col-sm-7">
+                <div class="input-group">
+                  <div class="input-group mb-3">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01"
+                        (change)='onChange($event)'>
+                      <label class="custom-file-label" for="inputGroupFile01">{{uploadFile}}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="input-group">
+              <div class="input-group ">
+                <img [src]="report.imageId ? imageUrl +report.imageId : '../../../assets/img/thumb.svg'" class='rounded mx-auto mw-25 d-block shadow'>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row" id='heading9'>
+          <div class="col-sm-12">
+            <button (click)="onSend()" class="btn  btn-success pull-right">{{report.id ?
+              'Αποθήκευση' : 'Υποβολή'}}</button>
+            <button *ngIf="report.id" class="btn  btn-danger  pull-right mr-2" (click)="delete()">Διαγραφή</button>
+            <button class="btn  btn-white  pull-right mr-2" [routerLink]="['/reports']">Πίσω</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 

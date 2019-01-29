@@ -1,0 +1,103 @@
+<div class="row p-1 mb-3">
+  <div class="col-xl-12 mt-3">
+    <span class="h3">Λίστα αιτημάτων</span>
+    <div class="btn-group float-right">
+      <div class="btn-group mr-2">
+        <div class="input-group">
+          <input title=" Πατήστε το Enter αφού εκχωρήσετε τον τίτλο της αναζητησής σας" type="text" class="form-control"
+            placeholder="Αναζήτηση ανα Τίτλο..." aria-label="Search for reports..." (keydown.enter)="searchTitle($event.target.value)"
+            aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <span class="input-group-text">
+              <i class="fa fa-search"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="btn-group" ngbDropdown>
+        <select (change)="getReports()" [(ngModel)]="reportState" class=" mr-sm-2 form-control">
+          <option [(ngValue)]='all' [selected]="reportState">Προβολή Όλων</option>
+          <option [(ngValue)]='pending'>Εκρεμεί</option>
+          <option [(ngValue)]='completed'>Ολοκληρωμένο</option>
+        </select>
+      </div>
+      <div class="btn-group" ngbDropdown>
+        <select (change)="getReports()" [(ngModel)]="type" class=" mr-sm-2 form-control">
+          <option [value]='4' [selected]="type=='4'">Όλα</option>
+          <option [value]='3'>Support</option>
+          <option [value]='2'>Change</option>
+          <option [value]='1'>Feature</option>
+          <option [value]='0'>Bug</option>
+        </select>
+      </div>
+      <div class="btn-group" ngbDropdown>
+        <select title="Αποτελέσματα" (change)="getReports()" [(ngModel)]="pageSize" class="form-control custom-select mr-sm-2">
+          <option [value]="5">5</option>
+          <option [value]="10">15</option>
+          <option [value]="15"> 25</option>
+          <option [value]="20">40</option>
+        </select>
+      </div>
+      <button type="button" class="btn btn-outline-info rounded" [routerLink]="['/report','new']">
+        <i class="fa fa-plus"></i> Νέο αίτημα
+      </button>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xl-12">
+    <table class="table table-sm table-bordered table-striped">
+      <thead>
+        <tr>
+          <th class="width-40">#</th>
+          <th>Hμ/νια</th>
+          <th>Τίτλος</th>
+          <th>Ονοματεπώνυμο</th>
+          <th>Περιγραφή</th>
+          <th class="text-xl-center">Τύπος</th>
+          <th class="width-100">Ενέργειες</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of rows;let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{ r.submitDate | date : 'dd-MM-yyyy' }}</td>
+          <td>{{ r.title }}</td>        
+          <td>{{ r.firstname }} {{ r.lastname }}</td>
+          <td>{{ r.summary }}</td>
+          <td class="text-uppercase">
+            <span class="badge badge-pill" [ngClass]="{'badge-success': r.reportType == 1,'badge-info': r.reportType == 3,
+            'badge-warning': r.reportType == 2,'badge-danger': r.reportType == 0}">
+              {{ getType(r.reportType) }}</span>
+          </td>
+          <td class="text-center">
+            <a [routerLink]="['/report',r.id]" class="btn btn-info btn-sm btn-rounded">
+              <i class="fa fa-edit"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row mt-3 mb-3" *ngIf="rows.length > 0">
+  <div class="col-xl-12 text-xl-center">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item ">
+          <a class="page-link" (click)="previousPage()">
+            <i class="fa fa-caret-left"></i>
+          </a>
+        </li>
+        <li class="page-item" [ngClass]="{'active': page === p}" *ngFor="let p of pages">
+          <a class="page-link" (click)="setPage(p)">{{p}}</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" (click)="nextPage()">
+            <i class="fa fa-caret-right"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

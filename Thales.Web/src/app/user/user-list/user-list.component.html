@@ -1,0 +1,132 @@
+<div class="row p-1 mb-3">
+  <div class="col-xl-12 mt-3">
+    <div class="row">
+      <div class="col-sm-3">
+        <span class="h3">Λίστα Χρηστών</span>
+      </div>
+      <div class="col-sm-9">
+        <div class="btn-group float-right">
+          <div class="mr-2">
+            <div class="input-group">
+              <input title=" Πατήστε το Enter αφού εκχωρήσετε τον τίτλο της αναζητησής σας" type="text" class="form-control" placeholder="Αναζήτηση ανα Χρήστη..."
+                aria-label="Search for reports..." (keydown.enter)="searchTitle($event.target.value)" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-search"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="btn-group" ngbDropdown>
+            <select (change)="getUsers()" [(ngModel)]="activeUser" class=" mr-sm-2 form-control">
+              <option [value]='0'>Προβολή Όλων</option>
+              <option [value]='2'>Απενεργοποιημένος</option>
+              <option [value]='1'>Ενεργός</option>
+            </select>
+          </div>
+          <div class="btn-group" ngbDropdown>
+            <select (change)="getUsers()" [(ngModel)]="userRole" class=" mr-sm-2 form-control">
+              <option [value]='-1'>Όλοι</option>
+              <option [value]='2'>Χρήστες</option>
+              <option [value]='1'>Ρυθμιστές</option>
+              <option [value]='0'>Διαχειριστές</option>
+            </select>
+          </div>
+          <div class="btn-group" ngbDropdown>
+            <select title="Αποτελέσματα" (change)="getUsers()" [(ngModel)]="pageSize" class="form-control custom-select mr-sm-2 w50 pl-2">
+              <option [value]="15">15</option>
+              <option [value]="30">30</option>
+              <option [value]="100">100</option>
+              <option [value]="500">500</option>
+            </select>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-outline-info rounded" [routerLink]="['/user','new']">
+              <i class="fa fa-plus"></i> Δημιουργεία
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xl-12">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th class="width-40">#</th>
+          <th class="text-xl-center">Όνομα</th>
+          <th class="text-xl-center">Επίθετο</th>
+          <th class="text-xl-center">Username</th>
+          <th class="text-xl-center">Ρόλος</th>
+          <th class="text-xl-center">Κατάσταση</th>
+          <th class="text-xl-center width-40">Ενέργειες</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of rows;let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{ r.name }}</td>
+          <td>{{ r.lastname }}</td>
+          <td>{{ r.username }}</td>
+          
+          <div *ngIf=" r.role === 0;then admin"></div>
+          <div *ngIf=" r.role === 1;then manager"></div>
+          <div *ngIf=" r.role === 2;then user"></div>
+          
+          <ng-template #admin>
+            <td><span class="badge-pill badge-info small pb-1 pt-1"><i class="fa fa-wrench pr-1"></i>Διαχειρηστής</span></td>
+          </ng-template>
+          <ng-template #manager>
+            <td><span class="badge-pill badge-success small pb-1 pt-1"><i class="fa fa-user-secret pr-1"></i>Ρυθμιστής</span></td>
+          </ng-template>
+          <ng-template #user>
+            <td><span class="badge-pill badge-primary small pb-1 pt-1"><i class="fa fa-user pr-1"></i>Χρήστης</span></td>
+          </ng-template>
+
+          <div *ngIf="r.isActive;then activate else deactivate"></div>
+          <ng-template #activate>
+            <td>
+              <span class="badge-pill badge-success small pb-1 pt-1">Ενεργός</span>
+            </td>
+          </ng-template>
+          <ng-template #deactivate>
+            <td>
+              <span class="badge-pill badge-danger small pb-1 pt-1">Ανενεργός</span>
+            </td>
+          </ng-template>
+
+          <td class="text-center">
+            <a [routerLink]="['/user',r.id]" class="btn btn-sm btn-secondary btn-rounded">
+              <i class="fa fa-edit"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- <div class="row mt-3 mb-3" *ngIf="rows.length > 0">
+    <div class="col-xl-12 text-xl-center">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item ">
+            <a class="page-link" (click)="previousPage()">
+              <i class="fa fa-caret-left"></i>
+            </a>
+          </li>
+          <li class="page-item" [ngClass]="{'active': page === p}" *ngFor="let p of pages">
+            <a class="page-link" (click)="setPage(p)">{{p}}</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" (click)="nextPage()">
+              <i class="fa fa-caret-right"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div> -->

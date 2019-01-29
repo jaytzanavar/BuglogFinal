@@ -1,0 +1,32 @@
+<div class="container" *ngIf="application">
+    <div class="row ">
+      <div class="col-sm-12 mt-3">
+        <p class="h1 text-dark">{{application.id ? 'Επεξεργασία εφαρμογης: '+application.name: 'Νέα εφαρμογη'}}</p>
+        <p class="h6 text-secondary pt-2 pb-2">Συμπλήρωστε την παρακάτω φόρμα και πατήστε υποβολή για ολοκλήρωση</p>
+        <hr>
+      </div>
+    </div>
+      <div class="form-group row">
+        <label for="inputName" class="col-sm-2 col-form-label">Ονομα εφαρμογης</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="Ονομα εφαρμογης" [(ngModel)]="application.name" />
+        </div>
+      </div>
+   
+      <div class="form-group row">
+        <label for="inputDescription" class="col-sm-2 col-form-label">Περιγραφη</label>
+        <div class="col-sm-10">
+          <textarea name="appDesc" type="text" class="form-control" id="inputDescription" placeholder="Περιγραφη" rows="10" [(ngModel)]="application.description"></textarea>
+        </div>
+      </div>
+   
+      <div class="form-group row">
+        <label for="submitGroup" class="col-sm-2 col-form-label"> </label>
+        <div class="col-sm-10 text-xl-right">
+          <button class="btn btn-white mr-2" [routerLink]="['/application']">Πίσω</button>
+          <button *ngIf="application.id" class="btn btn-danger mr-2" (click)="delete(application.id);">Διαγραφή</button>
+          <button  class="btn btn-success" (click)="insertOrUpdate();">{{application.id ? 'Αποθήκευση' : 'Υποβολή'}}</button>
+        </div>
+      </div>
+
+   </div>

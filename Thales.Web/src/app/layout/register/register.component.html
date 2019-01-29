@@ -1,0 +1,50 @@
+<div class="row align-items-center h-100">
+    <div class="col-xl-5 col-7 mx-auto">
+        <div class="row shadow rounded ">
+            <div class="col-md-5 bg-dark text-white p-5 bl-register-welcome">
+                <p class="h4 text-center">Εγγραφή</p>
+                <hr class="bg-white">
+                <p class="h6 text-light text-justify">
+                    Παρακαλούμε συμπληρώστε την φόρμα με τα στοιχεία σας για να εγγραφείτε και να γινεται μερος της
+                    αγαπημενης μας ομαδας
+                </p>
+            </div>
+            <div class="col-md-7 bg-light border-light-login p-4 pl-5">
+                <div class="form-group">
+                    <label for="col-form-label h6">Όνομα</label>
+                    <input type="text" class="form-control " [(ngModel)]="user.name" name="text" placeholder="">
+                </div>
+                <div class="form-group ">
+                    <label for="col-form-label h6">Επίθετο</label>
+                    <input type="text" class="form-control " [(ngModel)]="user.lastname" name="text" placeholder="">
+                </div>
+                <div class="form-group ">
+                    <label for="col-form-label h6">Username</label>
+                    <input type="text" class="form-control " [(ngModel)]="user.username" name="text" placeholder="">
+                </div>
+                <div class="form-group ">
+                    <label for="col-form-label h6">Password</label>
+                    <div class="input-group">
+                        <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="user.password" name="password"
+                            class="form-control " placeholder="abc123">
+                        <div class="input-group-prepend">
+                            <button class="btn border" type="button" (mousedown)="showPassword = true;" (mouseup)="showPassword = false">
+                                <i [ngClass]='showPassword ? "fa fa-eye-slash": "fa fa-eye "'></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label for="col-form-label  h6">Confirm Password</label>
+                    <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="passwordCheck" name="password"
+                        class="form-control " placeholder="abc123">
+                </div>
+                <div class="form-group  mt-2">
+                    <button [routerLink]="['/login']" type="button" class="btn btn-secondary">Πίσω</button>
+                    <button (click)='registerUser()' type="button" class="btn pull-right btn-info">Αποστολή
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

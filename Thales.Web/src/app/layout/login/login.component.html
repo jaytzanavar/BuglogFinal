@@ -1,0 +1,42 @@
+<div class="row align-items-center h-100">
+    <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 col-12 mx-auto">
+        <div class="row shadow rounded">
+            <div class="col-12 col-sm-5 bg-dark text-white bl-login-welcome p-5">
+                <p class="text-center h3 border-secondary"><i class="fa fa-lock mr-2"></i>Σύνδεση</p>
+                <hr class="bg-white">
+                <p class="text-light h6 text-justify">Παρακαλούμε εισάγετε τα στοιχεία σας για να συνδεθείτε</p>
+                <span>
+                    <a class="btn text-info p-0 mt-3" routerLink="/retrivepass">Ξεχάσατε τον κωδικό ?</a>
+                </span>
+            </div>
+            <div class="col-12 col-sm-7 bg-light border-light-login p-4 pl-5">
+                <div class="form-group ">
+                    <label class="col-form-label h6"><em>Όνομα Χρήστη</em></label>
+                    <div class="input-group">
+                        <input type="text" placeholder="Εκχωρείστε όνομα πρόσβασης" class="form-control" [(ngModel)]="username"
+                            autofocus>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-user"></i></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group ">
+                    <label class="col-form-label h6"><em>Κωδικός Πρόσβασης</em></label>
+                    <div class="input-group">
+                        <input type="password" (keyup.enter)="login()" [(ngModel)]="password" class="form-control"
+                            placeholder="Εκχωρείστε κωδικό">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <button class="btn pull-right btn-info" (click)="login()"><i class="fa fa-sign-in pr-2"></i>σύνδεση</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

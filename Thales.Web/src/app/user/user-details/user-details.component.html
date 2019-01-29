@@ -1,0 +1,125 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 mt-3">
+      <p class="h3 text-dark">{{user.id ? 'Επεξεργασία Χρήστη ': 'Νέος Χρήστης '}}
+      </p>
+      <p class="h6 text-secondary pt-2 pb-2">Συμπλήρωστε την παρακάτω φόρμα χρήστη και πατήστε υποβολή για ολοκλήρωση</p>
+      <hr>
+    </div>
+    <div [formGroup]='userForm' class="col">
+      <div class="form-group row">
+        <label class="w-10 col-form-label">Όνομα Χρήστη</label>
+        <div class="col">
+          <input [ngClass]="formErrors.name? 'is-invalid':''" type="text" class="form-control" formControlName='name' placeholder="Όνομα" >
+
+          <div *ngIf="formErrors.title" class="invalid-feedback-cust">
+            {{formErrors.name}}
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="w-10 col-form-label">Επώνυμο Χρήστη</label>
+        <div class="col">
+          <input [ngClass]="formErrors.lastname? 'is-invalid':''" type="text" class="form-control" formControlName='lastname' placeholder="Επώνυμο" >
+
+          <div *ngIf="formErrors.lastname" class="invalid-feedback-cust">
+            {{formErrors.lastname}}
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="w-10 col-form-label">Username</label>
+        <div class="col">
+          <input [ngClass]="formErrors.username? 'is-invalid':''" type="text" class="form-control" formControlName='username' placeholder="Username">
+
+          <div *ngIf="formErrors.username" class="invalid-feedback-cust">
+            {{formErrors.username}}
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="w-10 col-form-label">Password</label>
+        <div class="col">
+          <input  type="text" class="form-control" formControlName='password' placeholder="Κωδικός">
+          
+
+          <div *ngIf="formErrors.password" class="invalid-feedback-cust">
+            {{formErrors.password}}
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-between mb-3">
+        <div class="col">
+          <div class="form-group row">
+            <label class="w-10 col-form-label">Ρόλος Χρήστη</label>
+            <div class="col">
+              <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" formControlName='role'>
+                <label ngbButtonLabel class="btn-outline-primary">
+                  <input (click)='user.role = 2' ngbButton type="radio" [value]="2">
+                  <i class="fa fa-user"></i> Χρήστης
+                </label>
+                <label ngbButtonLabel class="btn-outline-success">
+                  <input (click)='user.role = 1' ngbButton type="radio" [value]="1">
+                  <i class="fa fa-user-secret"></i> Ρυθμιστής
+                </label>
+                <label ngbButtonLabel class="btn-outline-info">
+                  <input (click)='user.role = 0' ngbButton type="radio" [value]="0">
+                  <i class="fa fa-wrench"></i> Διαχειρηστής
+                </label>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+      <div class="row justify-content-between mb-3">
+        <div class="col">
+          <div class="form-group row">
+            <label class="w-10 col-form-label">Ενεργός</label>
+            <div class="col">
+              <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" formControlName='isActive'>
+                <label ngbButtonLabel class="btn-outline-danger">
+                  <input  ngbButton type="radio" [value]="false">
+                  <i class="fa fa-ban"></i> Aπενεργοποιήμενος
+                </label>
+                <label ngbButtonLabel class="btn-outline-success">
+                  <input  ngbButton type="radio" [value]="true">
+                  <i class="fa fa-bolt"></i> Ενεργοποιημένος
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-between mb-3">
+          <div class="col">
+              <div class="form-group row">
+                  <label class="w-10 col-form-label">Εφαρμογή</label>
+                  <div class="col">
+                      <angular2-multiselect [data]="dropdownList"
+                      [ngModelOptions]="{standalone: true}"
+                      [(ngModel)]="selectedItems"
+                      [settings]="dropdownSettings"
+                      (onSelect)="onItemSelect($event)"
+                      (onDeSelect)="OnItemDeSelect($event)"
+                      (onSelectAll)="onSelectAll($event)"
+                      (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="form-group row mt-3">
+        <div class="col-sm-12">
+          <button (click)="onSend()" class="btn  btn-success pull-right">{{user.id ? 'Αποθήκευση' : 'Υποβολή'}}</button>
+          <button *ngIf="user.id" class="btn  btn-danger  pull-right mr-2" (click)="delete()">Διαγραφή</button>
+          <button class="btn  btn-white  pull-right mr-2" [routerLink]="['/users']">Πίσω</button>
+        </div>
+      </div>
+
+    </div>
+  </div>

@@ -1,0 +1,59 @@
+.item
+    position: relative
+    width: 170px
+    height: 170px
+    display: inline-block
+    overflow: hidden
+    background: #fff
+    border: 3px solid #fff
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3)
+    
+     
+.item .imgExp 
+  max-width: 65%
+  max-height: 65%
+  transition: transform 0.5s
+ 
+
+.item:hover .imgExp
+   
+   transform: scale(1.2 , 1.2)
+.w-30
+    width: 30%
+
+.item:hover .fume-div
+    opacity: 1
+
+.fume-div
+    position: absolute
+    bottom: 0px
+    opacity: 0
+    width: 100%
+    height: 100%
+    background: #00000075
+    transition: opacity 0.7s
+
+small
+    font-size: 70%
+
+.th-app .th-wrap
+    background-color: rgba(0, 0, 0, .5)
+    &:hover
+        background-color: rgba(0, 0, 0, .6)
+.th-app:nth-child(2n+1) .th-wrap
+    background-color: rgba(0, 0, 0, .2)
+    &:hover
+        background-color: rgba(0, 0, 0, .3)
+
+.th-app
+    .th-wrap
+        transition: background-color .2s ease-in-out
+    .th-thumb
+        position: relative
+        img
+            position: absolute
+            top: 0px
+            left: 0px
+            right: 0px
+            bottom: 0px
+            margin: auto

@@ -1,0 +1,36 @@
+<div class="row p-1 mb-4">
+  <div class="col-12 mt-3">
+    <span class="h3">Εφαρμογες</span>
+    <button type="button" class="btn btn-outline-info float-right" [routerLink]="['/application','new']">
+      <i class="fa fa-plus"></i> Νέα εφαρμογή
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xl-12">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th class="width-50">#</th>
+          <th>Ονομα</th>
+          <th>Περιγραφη</th>
+          <th>Ημ/νια Δημ.</th>
+          <th class="width-50">Ενέργειες</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let n of applications;let i = index">
+          <td >{{ i+1 }}</td>
+          <td><a class="text-dark" routerLink="/application/{{n.id}}">{{ n.name }}</a></td>
+          <td>{{ n.description }}</td>
+          <td>{{ n.created | date:'dd-MM-yyyy' }}</td>
+          <td>
+            <a class="btn btn-danger btn-sm btn-rounded text-light mr-2" (click)="delete(n.id);"><i class="fa fa-trash-o"></i></a>
+            <a routerLink="/application/{{n.id}}" class="btn btn-info btn-sm btn-rounded"><i class="fa fa-edit"></i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

@@ -1,0 +1,94 @@
+<div class="container">
+    <div class="row mt-4">
+
+        <div class="col-md-3">
+            <div class="d-block text-center bg-light rounded p-0 border">
+                <div class="text-center p-3 pt-4 pb-2">
+                    <img src="src/assets/img/avatar.png" alt="" class="w-50" />
+                </div>
+                <div class="text-center p-3 pt-2 pb-4">
+                    <h4 class="text-dark text-dark m-0">{{profile.name}} {{profile.lastname}}</h4>
+                </div>
+                <div class="border-top text-left p-3 pt-2 pb-2">
+                    <h6 class="text-dark m-0">Αναφορες: <span class="badge badge badge-info ml-2"><i class="fa fa-archive mr-1"></i>{{profile.totalReports}}</span></h6>
+                </div>
+                <div class="border-top text-left p-3 pt-2 pb-2">
+                    <h6 class="text-dark m-0">Τύπος χρήστη:<span class="badge badge badge-primary ml-2"><i class="fa fa-user mr-1"></i>{{profile.roleName}}</span></h6>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-9">
+            <div class="d-block rounded bg-light border p-4">
+
+                <ngb-tabset>
+                    <ngb-tab title="Στοιχεία χρήστη">
+                        <ng-template ngbTabContent>
+                            <div class="form-group row text-dark mt-5">
+                                <label for="" class="col-sm-3 col-form-label text-right">Ονομα</label>
+                                <div class="col-sm-6">
+                                    <input type="text" readonly class="form-control" value="{{profile.name}}">
+                                </div>
+                            </div>
+                            <div class="form-group row text-dark">
+                                <label for="" class="col-sm-3 col-form-label text-right">Επιθετο</label>
+                                <div class="col-sm-6">
+                                    <input type="text" readonly class="form-control" value="{{profile.lastname}}">
+                                </div>
+                            </div>
+                            <div class="form-group row text-dark">
+                                <label for="" class="col-sm-3 col-form-label text-right">Ονομα χρηστη</label>
+                                <div class="col-sm-6">
+                                    <input type="text" readonly class="form-control" value="{{profile.username}}">
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab title="Αλλαγη κωδικού">
+                        <ng-template ngbTabContent>
+                            <div class="form-group row text-dark mt-2">
+                                <div class="col-sm-12">
+                                    <div *ngIf="passwordError" class="alert alert-warning m-2">
+                                        {{ passwordErrorMsg }}
+                                    </div>
+                                    <div *ngIf="passwordSuccess" class="alert alert-success m-2">
+                                        {{ passwordSuccessrMsg }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row text-dark mt-2">
+                                <label for="" class="col-sm-3 col-form-label text-right">Παλιός Κωδικός</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" value="" [(ngModel)]="_oldPassword">
+                                </div>
+                            </div>
+
+                            <div class="form-group row text-dark">
+                                <label for="" class="col-sm-3 col-form-label text-right">Νέος Κωδικός</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" value="" [(ngModel)]="_newPassword">
+                                </div>
+                            </div>
+
+                            <div class="form-group row text-dark">
+                                <label for="" class="col-sm-3 col-form-label text-right">Νέος Κωδικός Ξανά</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" value="" [(ngModel)]="_againNewPassword">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row text-dark pt-2">
+                                <label for="" class="col-sm-3 col-form-label text-right"></label>
+                                <div class="col-sm-6 text-right">
+                                    <button type="submit" class="btn btn-secondary" (click)="setNewPassword();">Αποθήκευση</button>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                </ngb-tabset>
+
+            </div>
+        </div>
+
+    </div>
+</div>
